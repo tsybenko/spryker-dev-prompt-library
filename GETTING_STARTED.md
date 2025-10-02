@@ -23,8 +23,21 @@ A guide to quickly start using the Spryker Prompts MCP server.
 
 Choose the installation method that best fits your environment:
 
-- **Method A: Script Installation** (Recommended) - Quick setup using automated script
-- **Method B: Docker** - Containerized deployment for isolated environment
+| Method | Best For | Pros | Cons |
+|--------|----------|------|------|
+| **Script Installation** | Quick setup, personal development | ✅ Fast setup<br>✅ Direct integration<br>✅ Auto-updates via uvx | ⚠️ Requires Python & uv |
+| **Docker** | Teams, production, isolated environments | ✅ Isolated environment<br>✅ No system dependencies<br>✅ Reproducible setup | ⚠️ Requires Docker<br>⚠️ Extra configuration step |
+
+**Choose Script Installation if:**
+- You want the fastest setup
+- You're working on personal projects
+- You already have Python/uv installed
+
+**Choose Docker if:**
+- You need environment isolation
+- You're deploying for a team
+- You prefer containerized solutions
+- You don't want to install Python/uv
 
 ---
 
