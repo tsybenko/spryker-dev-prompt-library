@@ -79,6 +79,7 @@ Use these rules in your workflows to ensure consistent and convention-compliant 
 ### MCP Server Integration
 - AI assistant accesses prompts through MCP server
 - Requires MCP-compatible AI assistants
+- **Installation options**: Script-based (recommended) or Docker
 - ⚠️ **Note**: MCP server usage can consume additional credits - consider disabling when not in use
 
 ### Hashtag Integration

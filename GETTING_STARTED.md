@@ -19,7 +19,29 @@ A guide to quickly start using the Spryker Prompts MCP server.
 
 > ⚠️ **Important**: MCP server usage can consume additional credits during operation. Consider disabling the server when not actively using prompts to avoid unnecessary credit usage.
 
-### Quick Start
+### Installation Methods
+
+Choose the installation method that best fits your environment:
+
+| Method | Best For | Pros | Cons |
+|--------|----------|------|------|
+| **Script Installation** | Quick setup, personal development | ✅ Fast setup<br>✅ Direct integration<br>✅ Auto-updates via uvx | ⚠️ Requires Python & uv |
+| **Docker** | Teams, production, isolated environments | ✅ Isolated environment<br>✅ No system dependencies<br>✅ Reproducible setup | ⚠️ Requires Docker<br>⚠️ Extra configuration step |
+
+**Choose Script Installation if:**
+- You want the fastest setup
+- You're working on personal projects
+- You already have Python/uv installed
+
+**Choose Docker if:**
+- You need environment isolation
+- You're deploying for a team
+- You prefer containerized solutions
+- You don't want to install Python/uv
+
+---
+
+### Method A: Script Installation (Recommended)
 
 A quick guide to set up and use the Spryker Prompts MCP (Model Context Protocol) server with your IDE.
 
@@ -143,6 +165,122 @@ Updated https://github.com/spryker-dev/prompt-library (d2b45720795cd18522a2bd070
 Built prompt-library @ git+https://github.com/spryker-dev/prompt-library@d2b45720795cd18522a2bd07045915def1c13d41
 Installed 34 packages in 47ms
 ```
+
+---
+
+### Method B: Docker Installation
+
+For users who prefer containerized deployments or need an isolated environment.
+
+#### Prerequisites
+
+- Docker installed on your system ([Install Docker](https://docs.docker.com/get-docker/))
+- Docker Compose (optional, for simplified management)
+
+#### 🐳 Option 1: Using Docker Run
+
+1. **Pull or build the image:**
+
+```bash
+# Clone the repository
+git clone https://github.com/spryker-dev/prompt-library.git
+cd prompt-library
+
+# Build the Docker image
+docker build -t spryker-prompts-mcp .
+```
+
+2. **Run the container:**
+
+```bash
+docker run -i --name spryker-prompts-mcp spryker-prompts-mcp
+```
+
+The container runs the MCP server in stdio mode by default.
+
+#### 🐳 Option 2: Using Docker Compose (Recommended)
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/spryker-dev/prompt-library.git
+cd prompt-library
+```
+
+2. **Start the service:**
+
+```bash
+docker compose up -d
+```
+
+This will:
+- Build the Docker image
+- Start the container in detached mode
+- Mount the prompts directory for easy updates
+
+3. **View logs:**
+
+```bash
+docker compose logs -f spryker-prompts-mcp
+```
+
+4. **Stop the service:**
+
+```bash
+docker compose down
+```
+
+#### 📋 Configure IDE for Docker-based MCP Server
+
+After starting the Docker container, configure your IDE to use the containerized MCP server:
+
+**Configuration Example:**
+
+```json
+{
+  "mcpServers": {
+    "spryker-prompts": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "spryker-prompts-mcp",
+        "python3",
+        "-m",
+        "prompt_mcp"
+      ]
+    }
+  }
+}
+```
+
+> **Note**: The container must be running (`docker compose up -d`) for the IDE integration to work.
+
+#### 🔄 Updating Prompts
+
+With Docker, you have two options:
+
+1. **Without rebuilding** (prompts directory is mounted):
+   ```bash
+   cd prompt-library
+   git pull origin main
+   docker compose restart
+   ```
+
+2. **Full rebuild** (recommended for major updates):
+   ```bash
+   cd prompt-library
+   git pull origin main
+   docker compose down
+   docker compose up -d --build
+   ```
+
+#### Benefits of Docker Deployment
+
+✅ **Isolated environment** - No conflicts with system Python or packages \
+✅ **Consistent setup** - Works the same across all platforms \
+✅ **Easy updates** - Pull and rebuild without affecting system \
+✅ **Team deployment** - Share the same containerized setup \
 
 ---
 

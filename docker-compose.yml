@@ -1,0 +1,14 @@
+services:
+  spryker-prompts-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spryker-prompts-mcp
+    stdin_open: true
+    tty: true
+    volumes:
+      # Mount prompts directory for easy updates without rebuilding
+      - ./prompts:/app/prompts:ro
+    restart: unless-stopped
+    # Note: MCP server uses stdio by default, so we keep it interactive
+    # For integration with MCP clients, you'll typically use this with docker exec

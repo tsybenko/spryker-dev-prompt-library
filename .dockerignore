@@ -1,0 +1,52 @@
+# Git files
+.git
+.gitignore
+.gitmodules
+
+# IDE files
+.idea
+.vscode
+.project
+*.sublime-*
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+prompt_mcp/embeddings_cache.pkl
+prompt_library.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# OS files
+.DS_Store
+*.AppleDouble
+*.AppleDB
+*.AppleDesktop
+Thumbs.db
+
+# Documentation (keep for reference but not needed in container)
+.github/
+CONTRIBUTING.md
+ide_setup/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.log
+*.tmp
+*.bak
+prompt-tags.json
